@@ -1,4 +1,4 @@
-import { prop } from '@typegoose/typegoose';
+import { index, prop } from '@typegoose/typegoose';
 import { Base } from '@typegoose/typegoose/lib/defaultClasses';
 
 export enum TopLevelCategory {
@@ -24,16 +24,18 @@ export class HhData {
 
 export class Advantage {
   @prop()
-  title: number;
+  title: string;
 
   @prop()
-  description: number;
+  description: string;
 }
 
 export interface TopPageModel extends Base {}
+
+@index({ '$**': 'text' })
 export class TopPageModel {
   @prop({ enum: TopLevelCategory })
-  firtsCategory: TopLevelCategory;
+  firstCategory: TopLevelCategory;
 
   @prop()
   secondCategory: string;
